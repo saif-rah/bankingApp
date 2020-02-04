@@ -28,14 +28,6 @@ public class ServerApplication {
 	private ApplicationContext applicationContext;
 
 	@Bean
-	public ServletRegistrationBean authServletRegistrationBean() {
-		TProcessor processor =
-				new TAuthService.Processor<AuthHandler>(applicationContext.getBean(AuthHandler.class));
-		TProtocolFactory protoFactory = new TJSONProtocol.Factory();
-		Servlet authServlet = new TServlet(processor, protoFactory);
-		return new ServletRegistrationBean(authServlet, "/banking/auth/*");
-	}
-	@Bean
 	public ServletRegistrationBean customerServletRegistrationBean() {
 		TProcessor processor =
 				new TCustomerService.Processor<CustomerServiceHandler>(applicationContext.getBean(CustomerServiceHandler.class));
@@ -43,6 +35,16 @@ public class ServerApplication {
 		Servlet customerServlet = new TServlet(processor, protoFactory);
 		return new ServletRegistrationBean(customerServlet, "/banking/customer/*");
 	}
+
+	@Bean
+	public ServletRegistrationBean authServletRegistrationBean() {
+		TProcessor processor =
+				new TAuthService.Processor<AuthHandler>(applicationContext.getBean(AuthHandler.class));
+		TProtocolFactory protoFactory = new TJSONProtocol.Factory();
+		Servlet authServlet = new TServlet(processor, protoFactory);
+		return new ServletRegistrationBean(authServlet, "/banking/auth/*");
+	}
+
 	@Bean
 	public ServletRegistrationBean managerServletRegistrationBean() {
 		TProcessor processor =

@@ -22,19 +22,24 @@ import java.util.List;
 public class CustomerServiceHandler implements TCustomerService.Iface {
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private AccountNumberGenerator accountNumberGenerator;
 
     @Override
     public String addAccountRequest(TCustomer tCustomer) throws TException {
-        AccountNumberGenerator accountNumberGenerator = new AccountNumberGenerator();
+        //AccountNumberGenerator accountNumberGenerator = new AccountNumberGenerator();
         String accountNumber = accountNumberGenerator.generateAccountNumber(tCustomer.branchCode, "customer");
         Customer customer = new Customer(accountNumber, tCustomer.branchCode, tCustomer.username, tCustomer.transactions);
         customerRepository.save(customer);
         Account account = new Account(accountNumber, "customer", tCustomer.password, false);
         accountRepository.save(account);
+        System.out.println(accountRepository.findAll().size());
+        System.out.println("hello");
         return "Account Created";
     }
 

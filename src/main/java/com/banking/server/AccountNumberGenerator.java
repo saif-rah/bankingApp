@@ -4,7 +4,9 @@ import com.banking.server.repositories.AccountRepository;
 import com.banking.server.repositories.CustomerRepository;
 import com.banking.server.repositories.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountNumberGenerator {
 
     @Autowired
@@ -21,7 +23,8 @@ public class AccountNumberGenerator {
         String newAccountNumber="";
         String newRole = role.toLowerCase();
         if(newRole.equals("customer")){
-            size=customerRepository.countAllByBranchCode(branchCode);
+            size=customerRepository.findAll().size();
+            //System.out.println(accountRepository.findAll().size());
             size++;
             newAccountNumber = "00";
             newAccountNumber+=branchCode;
