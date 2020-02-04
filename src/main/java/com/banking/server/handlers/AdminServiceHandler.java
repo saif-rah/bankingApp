@@ -16,6 +16,7 @@ import org.apache.thrift.TException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,7 +47,7 @@ public class AdminServiceHandler implements TAdminService.Iface {
     public String removeManager(String accountNumber) throws TException {
         Account curAccount = accountRepository.findByAccountNumber(accountNumber);
         curAccount.setActive(false);
-        accountRepository.deleteByAccountNumber(accountNumber);
+//        accountRepository.deleteByAccountNumber(accountNumber);
         accountRepository.save(curAccount);
         return "Manager removed";
     }
@@ -54,10 +55,10 @@ public class AdminServiceHandler implements TAdminService.Iface {
     @Override
     public List<TManager> getAllManagers() throws TException {
 
-        List<Account> managerList = null;
-        managerList = accountRepository.findAllByRoleAndIsActive("01", true);
+        List<Account> managerList = new ArrayList<Account>();
+        managerList = accountRepository.findAllByRoleAndIsActive("manager", true);
 
-        List<TManager> tManagerList = null;
+        List<TManager> tManagerList = new ArrayList<TManager>();
         for(Account managerAccount : managerList){
             Manager managerDetails = managerRepository.findByAccountNumber(managerAccount.getAccountNumber());
             tManagerList.add(new TManager(managerAccount.getAccountNumber(), managerDetails.getBranchCode(), managerDetails.getUsername()));
@@ -69,11 +70,11 @@ public class AdminServiceHandler implements TAdminService.Iface {
     @Override
     public String addBranch(String branchName, String branchCity) throws TException {
 
-        long size=branchRepository.count();
+        long size = branchRepository.count();
 
         branchRepository.save(new Branch(String.format("%04d",size+1),branchName,branchCity,0));
 
-        return String.valueOf(size);
+        return String.format("%04d",size+1);
     }
 
     @Override

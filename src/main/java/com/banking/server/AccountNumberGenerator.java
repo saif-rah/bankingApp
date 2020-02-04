@@ -16,7 +16,7 @@ public class AccountNumberGenerator {
     @Autowired
     CustomerRepository customerRepository;
 
-    public String generateAccountNumber(String branchCode,String role) {
+    public String generateAccountNumber(String branchCode, String role) {
         long size=0;
         String newAccountNumber="";
         String newRole = role.toLowerCase();

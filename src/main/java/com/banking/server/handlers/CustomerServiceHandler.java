@@ -35,7 +35,7 @@ public class CustomerServiceHandler implements TCustomerService.Iface {
         customerRepository.save(customer);
         Account account = new Account(accountNumber, "customer", tCustomer.password, false);
         accountRepository.save(account);
-        return null;
+        return "Account Created";
     }
 
     @Override
