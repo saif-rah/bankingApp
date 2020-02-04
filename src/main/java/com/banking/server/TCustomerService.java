@@ -3816,14 +3816,14 @@ public class TCustomerService {
             case 0: // SUCCESS
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
-                  org.apache.thrift.protocol.TList _list8 = iprot.readListBegin();
-                  struct.success = new ArrayList<TTransaction>(_list8.size);
-                  TTransaction _elem9;
-                  for (int _i10 = 0; _i10 < _list8.size; ++_i10)
+                  org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
+                  struct.success = new ArrayList<TTransaction>(_list16.size);
+                  TTransaction _elem17;
+                  for (int _i18 = 0; _i18 < _list16.size; ++_i18)
                   {
-                    _elem9 = new TTransaction();
-                    _elem9.read(iprot);
-                    struct.success.add(_elem9);
+                    _elem17 = new TTransaction();
+                    _elem17.read(iprot);
+                    struct.success.add(_elem17);
                   }
                   iprot.readListEnd();
                 }
@@ -3851,9 +3851,9 @@ public class TCustomerService {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (TTransaction _iter11 : struct.success)
+            for (TTransaction _iter19 : struct.success)
             {
-              _iter11.write(oprot);
+              _iter19.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -3884,9 +3884,9 @@ public class TCustomerService {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (TTransaction _iter12 : struct.success)
+            for (TTransaction _iter20 : struct.success)
             {
-              _iter12.write(oprot);
+              _iter20.write(oprot);
             }
           }
         }
@@ -3898,14 +3898,14 @@ public class TCustomerService {
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
-            org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<TTransaction>(_list13.size);
-            TTransaction _elem14;
-            for (int _i15 = 0; _i15 < _list13.size; ++_i15)
+            org.apache.thrift.protocol.TList _list21 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+            struct.success = new ArrayList<TTransaction>(_list21.size);
+            TTransaction _elem22;
+            for (int _i23 = 0; _i23 < _list21.size; ++_i23)
             {
-              _elem14 = new TTransaction();
-              _elem14.read(iprot);
-              struct.success.add(_elem14);
+              _elem22 = new TTransaction();
+              _elem22.read(iprot);
+              struct.success.add(_elem22);
             }
           }
           struct.setSuccessIsSet(true);

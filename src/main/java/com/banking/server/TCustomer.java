@@ -41,6 +41,7 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
   private static final org.apache.thrift.protocol.TField USERNAME_FIELD_DESC = new org.apache.thrift.protocol.TField("username", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField PASSWORD_FIELD_DESC = new org.apache.thrift.protocol.TField("password", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField BRANCH_CODE_FIELD_DESC = new org.apache.thrift.protocol.TField("branchCode", org.apache.thrift.protocol.TType.STRING, (short)3);
+  private static final org.apache.thrift.protocol.TField TRANSACTIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("transactions", org.apache.thrift.protocol.TType.LIST, (short)4);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -51,12 +52,14 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
   public String username; // required
   public String password; // required
   public String branchCode; // required
+  public List<TTransaction> transactions; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     USERNAME((short)1, "username"),
     PASSWORD((short)2, "password"),
-    BRANCH_CODE((short)3, "branchCode");
+    BRANCH_CODE((short)3, "branchCode"),
+    TRANSACTIONS((short)4, "transactions");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -77,6 +80,8 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
           return PASSWORD;
         case 3: // BRANCH_CODE
           return BRANCH_CODE;
+        case 4: // TRANSACTIONS
+          return TRANSACTIONS;
         default:
           return null;
       }
@@ -126,6 +131,9 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.BRANCH_CODE, new org.apache.thrift.meta_data.FieldMetaData("branchCode", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.TRANSACTIONS, new org.apache.thrift.meta_data.FieldMetaData("transactions", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRUCT            , "TTransaction"))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(TCustomer.class, metaDataMap);
   }
@@ -136,12 +144,14 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
   public TCustomer(
     String username,
     String password,
-    String branchCode)
+    String branchCode,
+    List<TTransaction> transactions)
   {
     this();
     this.username = username;
     this.password = password;
     this.branchCode = branchCode;
+    this.transactions = transactions;
   }
 
   /**
@@ -157,6 +167,13 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
     if (other.isSetBranchCode()) {
       this.branchCode = other.branchCode;
     }
+    if (other.isSetTransactions()) {
+      List<TTransaction> __this__transactions = new ArrayList<TTransaction>(other.transactions.size());
+      for (TTransaction other_element : other.transactions) {
+        __this__transactions.add(other_element);
+      }
+      this.transactions = __this__transactions;
+    }
   }
 
   public TCustomer deepCopy() {
@@ -168,6 +185,7 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
     this.username = null;
     this.password = null;
     this.branchCode = null;
+    this.transactions = null;
   }
 
   public String getUsername() {
@@ -242,6 +260,45 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
     }
   }
 
+  public int getTransactionsSize() {
+    return (this.transactions == null) ? 0 : this.transactions.size();
+  }
+
+  public java.util.Iterator<TTransaction> getTransactionsIterator() {
+    return (this.transactions == null) ? null : this.transactions.iterator();
+  }
+
+  public void addToTransactions(TTransaction elem) {
+    if (this.transactions == null) {
+      this.transactions = new ArrayList<TTransaction>();
+    }
+    this.transactions.add(elem);
+  }
+
+  public List<TTransaction> getTransactions() {
+    return this.transactions;
+  }
+
+  public TCustomer setTransactions(List<TTransaction> transactions) {
+    this.transactions = transactions;
+    return this;
+  }
+
+  public void unsetTransactions() {
+    this.transactions = null;
+  }
+
+  /** Returns true if field transactions is set (has been assigned a value) and false otherwise */
+  public boolean isSetTransactions() {
+    return this.transactions != null;
+  }
+
+  public void setTransactionsIsSet(boolean value) {
+    if (!value) {
+      this.transactions = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case USERNAME:
@@ -268,6 +325,14 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
       }
       break;
 
+    case TRANSACTIONS:
+      if (value == null) {
+        unsetTransactions();
+      } else {
+        setTransactions((List<TTransaction>)value);
+      }
+      break;
+
     }
   }
 
@@ -281,6 +346,9 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
 
     case BRANCH_CODE:
       return getBranchCode();
+
+    case TRANSACTIONS:
+      return getTransactions();
 
     }
     throw new IllegalStateException();
@@ -299,6 +367,8 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
       return isSetPassword();
     case BRANCH_CODE:
       return isSetBranchCode();
+    case TRANSACTIONS:
+      return isSetTransactions();
     }
     throw new IllegalStateException();
   }
@@ -343,6 +413,15 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
         return false;
     }
 
+    boolean this_present_transactions = true && this.isSetTransactions();
+    boolean that_present_transactions = true && that.isSetTransactions();
+    if (this_present_transactions || that_present_transactions) {
+      if (!(this_present_transactions && that_present_transactions))
+        return false;
+      if (!this.transactions.equals(that.transactions))
+        return false;
+    }
+
     return true;
   }
 
@@ -364,6 +443,11 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
     list.add(present_branchCode);
     if (present_branchCode)
       list.add(branchCode);
+
+    boolean present_transactions = true && (isSetTransactions());
+    list.add(present_transactions);
+    if (present_transactions)
+      list.add(transactions);
 
     return list.hashCode();
   }
@@ -402,6 +486,16 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
     }
     if (isSetBranchCode()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.branchCode, other.branchCode);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetTransactions()).compareTo(other.isSetTransactions());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetTransactions()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.transactions, other.transactions);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -447,6 +541,14 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
       sb.append("null");
     } else {
       sb.append(this.branchCode);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("transactions:");
+    if (this.transactions == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.transactions);
     }
     first = false;
     sb.append(")");
@@ -516,6 +618,25 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 4: // TRANSACTIONS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
+                struct.transactions = new ArrayList<TTransaction>(_list0.size);
+                TTransaction _elem1;
+                for (int _i2 = 0; _i2 < _list0.size; ++_i2)
+                {
+                  _elem1 = new TTransaction();
+                  _elem1.read(iprot);
+                  struct.transactions.add(_elem1);
+                }
+                iprot.readListEnd();
+              }
+              struct.setTransactionsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -546,6 +667,18 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
         oprot.writeString(struct.branchCode);
         oprot.writeFieldEnd();
       }
+      if (struct.transactions != null) {
+        oprot.writeFieldBegin(TRANSACTIONS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.transactions.size()));
+          for (TTransaction _iter3 : struct.transactions)
+          {
+            _iter3.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -573,7 +706,10 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
       if (struct.isSetBranchCode()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetTransactions()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetUsername()) {
         oprot.writeString(struct.username);
       }
@@ -583,12 +719,21 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
       if (struct.isSetBranchCode()) {
         oprot.writeString(struct.branchCode);
       }
+      if (struct.isSetTransactions()) {
+        {
+          oprot.writeI32(struct.transactions.size());
+          for (TTransaction _iter4 : struct.transactions)
+          {
+            _iter4.write(oprot);
+          }
+        }
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, TCustomer struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(3);
+      BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.username = iprot.readString();
         struct.setUsernameIsSet(true);
@@ -600,6 +745,20 @@ public class TCustomer implements org.apache.thrift.TBase<TCustomer, TCustomer._
       if (incoming.get(2)) {
         struct.branchCode = iprot.readString();
         struct.setBranchCodeIsSet(true);
+      }
+      if (incoming.get(3)) {
+        {
+          org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.transactions = new ArrayList<TTransaction>(_list5.size);
+          TTransaction _elem6;
+          for (int _i7 = 0; _i7 < _list5.size; ++_i7)
+          {
+            _elem6 = new TTransaction();
+            _elem6.read(iprot);
+            struct.transactions.add(_elem6);
+          }
+        }
+        struct.setTransactionsIsSet(true);
       }
     }
   }
