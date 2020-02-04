@@ -1,7 +1,10 @@
 package com.banking.server.dao;
 
+import com.banking.server.TTransaction;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document
 public class Customer {
@@ -12,16 +15,18 @@ public class Customer {
     private double balance;
     private boolean isVerified;
     private String verifiedByManagerAccountNo;
+    private List<TTransaction> transactions;
 
     public Customer() {
     }
 
-    public Customer(String branchCode, String username) {
+    public Customer(String branchCode, String username, List<TTransaction> transactions) {
         this.branchCode = branchCode;
         this.username = username;
         this.balance = 0;
         this.isVerified = false;
         this.verifiedByManagerAccountNo = "";
+        this.transactions = transactions;
     }
 
     public String getAccountNumber() {
@@ -64,6 +69,13 @@ public class Customer {
         isVerified = verified;
     }
 
+    public List<TTransaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<TTransaction> transactions) {
+        this.transactions = transactions;
+    }
     public String getVerifiedByManagerAccountNo() {
         return verifiedByManagerAccountNo;
     }

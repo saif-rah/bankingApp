@@ -1,15 +1,19 @@
 package com.banking.server.dao;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Account {
     @Id
+    private String id;
+    @Indexed
     private String accountNumber;
     private String role;
     private String password;
     private boolean isLoggedIn;
+    private boolean isActive;
 
     public Account() {
     }
@@ -18,7 +22,16 @@ public class Account {
         this.accountNumber = accountNumber;
         this.role = role;
         this.password = password;
+        this.isActive = true;
         this.isLoggedIn = isLoggedIn;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public String getAccountNumber() {
