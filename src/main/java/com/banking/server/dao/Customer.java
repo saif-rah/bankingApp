@@ -21,7 +21,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String branchCode, String username, List<TTransaction> transactions) {
+    public Customer(String accountNumber,String branchCode, String username, List<TTransaction> transactions) {
+        this.accountNumber = accountNumber;
         this.branchCode = branchCode;
         this.username = username;
         this.balance = 0;
@@ -74,8 +75,8 @@ public class Customer {
         return transactions;
     }
 
-    public void setTransactions(List<TTransaction> transactions) {
-        this.transactions = transactions;
+    public void setTransactions(TTransaction transactions) {
+        this.transactions.add(transactions);
     }
     public String getVerifiedByManagerAccountNo() {
         return verifiedByManagerAccountNo;
