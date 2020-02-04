@@ -9,6 +9,7 @@ import java.util.List;
 @Document
 public class Customer {
     @Id
+    private String id;
     private String accountNumber;
     private String username;
     private String branchCode;

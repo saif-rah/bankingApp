@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Manager {
     @Id
+    private String id;
     private String accountNumber;
     private String branchCode;
     private String username;
