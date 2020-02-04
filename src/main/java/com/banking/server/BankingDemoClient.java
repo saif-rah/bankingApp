@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BankingDemoClient {
-    private static int port = 8080;
+    private static int port = 8081;
     private static String host = "localhost";
     private static String uri = "banking/customer";
 
@@ -16,7 +16,7 @@ public class BankingDemoClient {
 
         try {
             // create HTTP client
-            THttpClient httpClient = new THttpClient("http://" + host + ":" + port + "/" + uri);
+            THttpClient httpClient = new THttpClient("http://localhost:8080/banking/customer/" );
             httpClient.setConnectTimeout(3000);
             TProtocol protocol = new TJSONProtocol(httpClient);
 
