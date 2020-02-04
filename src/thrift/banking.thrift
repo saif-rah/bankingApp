@@ -22,6 +22,7 @@ service TAuthService{
     string login(1: string accountNumber, 2: string password);
     string logout(1: string accountNumber);
 }
+
 service TAdminService {
     string addManager(1: string username, 2: string password, 3: string branchCode);
     string removeManager(1: string accountNumber);
