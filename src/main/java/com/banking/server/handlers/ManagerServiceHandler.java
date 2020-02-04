@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 public class ManagerServiceHandler implements TManagerService.Iface {
     @Override
     public String addCustomer(String customerAccountNumber, String managerAccountNumber) throws TException {
+
         return null;
     }
 
