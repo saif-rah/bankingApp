@@ -14,7 +14,8 @@ public class Manager {
     public Manager() {
     }
 
-    public Manager(String branchCode, String username) {
+    public Manager(String accountNumber,String branchCode, String username) {
+        this.accountNumber=accountNumber;
         this.branchCode = branchCode;
         this.username = username;
     }
