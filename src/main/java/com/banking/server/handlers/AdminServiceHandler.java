@@ -44,14 +44,26 @@ public class AdminServiceHandler implements TAdminService.Iface {
 
     @Override
     public String removeManager(String accountNumber) throws TException {
-
-        return null;
+        Account curAccount = accountRepository.findByAccountNumber(accountNumber);
+        curAccount.setActive(false);
+        accountRepository.deleteByAccountNumber(accountNumber);
+        accountRepository.save(curAccount);
+        return "Manager removed";
     }
 
     @Override
     public List<TManager> getAllManagers() throws TException {
 
-        return null;
+        List<Account> managerList = null;
+        managerList = accountRepository.findAllByRoleAndIsActive("01", true);
+
+        List<TManager> tManagerList = null;
+        for(Account managerAccount : managerList){
+            Manager managerDetails = managerRepository.findByAccountNumber(managerAccount.getAccountNumber());
+            tManagerList.add(new TManager(managerAccount.getAccountNumber(), managerDetails.getBranchCode(), managerDetails.getUsername()));
+        }
+
+        return tManagerList;
     }
 
     @Override
