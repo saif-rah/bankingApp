@@ -10,6 +10,7 @@ import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.server.TServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -33,7 +34,9 @@ public class ServerApplication {
 				new TAuthService.Processor<AuthHandler>(applicationContext.getBean(AuthHandler.class));
 		TProtocolFactory protoFactory = new TJSONProtocol.Factory();
 		Servlet authServlet = new TServlet(processor, protoFactory);
-		return new ServletRegistrationBean(authServlet, "/banking/auth/*");
+		ServletRegistrationBean s = new ServletRegistrationBean(authServlet, "/banking/auth/*");
+		s.setName("authServletRegistrationBean");
+		return s;
 	}
 
 	@Bean
@@ -42,7 +45,9 @@ public class ServerApplication {
 				new TCustomerService.Processor<CustomerServiceHandler>(applicationContext.getBean(CustomerServiceHandler.class));
 		TProtocolFactory protoFactory = new TJSONProtocol.Factory();
 		Servlet customerServlet = new TServlet(processor, protoFactory);
-		return new ServletRegistrationBean(customerServlet, "/banking/customer/*");
+		ServletRegistrationBean s = new ServletRegistrationBean(customerServlet, "/banking/customer/*");
+		s.setName("customerServletRegistrationBean");
+		return s;
 	}
 
 	@Bean
@@ -51,7 +56,9 @@ public class ServerApplication {
 				new TManagerService.Processor<ManagerServiceHandler>(applicationContext.getBean(ManagerServiceHandler.class));
 		TProtocolFactory protoFactory = new TJSONProtocol.Factory();
 		Servlet managerServlet = new TServlet(processor, protoFactory);
-		return new ServletRegistrationBean(managerServlet, "/banking/manager/*");
+		ServletRegistrationBean s = new ServletRegistrationBean(managerServlet, "/banking/manager/*");
+		s.setName("managerServletRegistrationBean");
+		return s;
 	}
 	@Bean
 	public ServletRegistrationBean adminServletRegistrationBean() {
@@ -59,6 +66,8 @@ public class ServerApplication {
 				new TAdminService.Processor<AdminServiceHandler>(applicationContext.getBean(AdminServiceHandler.class));
 		TProtocolFactory protoFactory = new TJSONProtocol.Factory();
 		Servlet adminServlet = new TServlet(processor, protoFactory);
-		return new ServletRegistrationBean(adminServlet, "/banking/admin/*");
+		ServletRegistrationBean s = new  ServletRegistrationBean(adminServlet, "/banking/admin/*");
+		s.setName("adminServletRegistrationBean");
+		return s;
 	}
 }
