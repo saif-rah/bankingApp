@@ -24,7 +24,6 @@ public class AccountNumberGenerator {
         String newRole = role.toLowerCase();
         if(newRole.equals("customer")){
             size=customerRepository.findAll().size();
-            //System.out.println(accountRepository.findAll().size());
             size++;
             newAccountNumber = "00";
             newAccountNumber+=branchCode;
@@ -38,7 +37,6 @@ public class AccountNumberGenerator {
             newAccountNumber+=String.format("%06d", size);
         }
         return newAccountNumber;
-
     }
 
 

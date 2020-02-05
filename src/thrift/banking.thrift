@@ -10,7 +10,6 @@ struct TCustomer{
     1: string username;
     2: string password;
     3: string branchCode;
-    4: list<TTransaction> transactions;
 }
 
 struct TTransaction{

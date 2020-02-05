@@ -33,8 +33,6 @@ public class AdminServiceHandler implements TAdminService.Iface {
 
     @Override
     public String addManager(String username, String password, String branchCode) throws TException {
-
-
         AccountNumberGenerator accountNumberGenerator=new AccountNumberGenerator();
         String generatedAccountNumber = (String) accountNumberGenerator.generateAccountNumber(branchCode,"manager");
         managerRepository.save(new Manager(generatedAccountNumber,branchCode,username));
