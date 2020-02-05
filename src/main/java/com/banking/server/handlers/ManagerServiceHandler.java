@@ -26,11 +26,10 @@ public class ManagerServiceHandler implements TManagerService.Iface {
 
     @Override
     public String removeCustomer(String accountNumber) throws TException {
-
         Account acc = accountRepository.findByAccountNumber(accountNumber);
         acc.setActive(false);
         accountRepository.save(acc);
-        return "Accounnt is inactive";
+        return "Account is inactive";
     }
 
     @Override

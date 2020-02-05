@@ -18,6 +18,7 @@ public class AuthHandler implements TAuthService.Iface {
         Account account = accountRepository.findByAccountNumber(accountNumber);
         if(account!=null && account.getPassword().equals(password)){
             account.setLoggedIn(true);
+            accountRepository.save(account);
             System.out.println("user logged in");
             return "user log in successful";
         }
@@ -26,9 +27,11 @@ public class AuthHandler implements TAuthService.Iface {
 
     @Override
     public String logout(String accountNumber) throws TException {
+        System.out.println(accountNumber);
         Account account = accountRepository.findByAccountNumber(accountNumber);
         if(account!=null && account.isLoggedIn()==true){
             account.setLoggedIn(false);
+            accountRepository.save(account);
             System.out.println("user logged out");
             return "user log out successful";
         }

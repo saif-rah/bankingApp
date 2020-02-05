@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.parser.DTDConstants;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,14 +33,13 @@ public class CustomerServiceHandler implements TCustomerService.Iface {
 
     @Override
     public String addAccountRequest(TCustomer tCustomer) throws TException {
-        //AccountNumberGenerator accountNumberGenerator = new AccountNumberGenerator();
+
         String accountNumber = accountNumberGenerator.generateAccountNumber(tCustomer.branchCode, "customer");
-        Customer customer = new Customer(accountNumber, tCustomer.branchCode, tCustomer.username, tCustomer.transactions);
+        List<TTransaction> tTransactions = new ArrayList<>();
+        Customer customer = new Customer(accountNumber, tCustomer.branchCode, tCustomer.username,tTransactions );
         customerRepository.save(customer);
         Account account = new Account(accountNumber, "customer", tCustomer.password, false);
         accountRepository.save(account);
-        System.out.println(accountRepository.findAll().size());
-        System.out.println("hello");
         return "Account Created";
     }
 
